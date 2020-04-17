@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+
+before_install:
+  - docker build -t raghve/react -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run raghve/react npm test -- --coverage
+
+after_sucess:
+  - docker build -t raghve/multi-client ./client
+  - docker build -t raghve/multi-server ./server
+  - docker build -t raghve/multt-nginx ./nginx
+  - docker build -t raghve/multi-worker ./worker
+  - echo "DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - docker push raghve/multi-client
+  - docker push raghve/multi-server
+  - docker push raghve/multt-nginx
+  - docker push raghve/multi-worker
