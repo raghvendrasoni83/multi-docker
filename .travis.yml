@@ -19,3 +19,17 @@ after_sucess:
   - docker push rg3xists/multi-server
   - docker push rg3xists/multt-nginx
   - docker push rg3xists/multi-worker
+
+
+deploy:
+  provider: elasticbeantalk
+  region: ap-south-1
+  app: docker
+  env: Docker-env
+  bucket_name: elasticbeanstalk-ap-south-1-908800051602
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access:key:
+    secure: $AWS_SECRET_KEY
