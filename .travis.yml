@@ -5,7 +5,6 @@ services:
 
 before_install:
   - docker build -t rg3xists/react -f ./client/Dockerfile.dev ./client
-  - rvm 1.9.3 do gem install aws-sdk -v 3
 
 script:
   - docker run rg3xists/react npm test -- --coverage
