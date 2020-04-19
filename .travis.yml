@@ -14,7 +14,7 @@ after_sucess:
   - docker build -t rg3xists/multi-server ./server
   - docker build -t rg3xists/multt-nginx ./nginx
   - docker build -t rg3xists/multi-worker ./worker
-  - echo "DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push rg3xists/multi-client
   - docker push rg3xists/multi-server
   - docker push rg3xists/multt-nginx
