@@ -10,9 +10,9 @@ script:
   - docker run rg3xists/react npm test -- --coverage
 
 after_sucess:
-  - docker build -t rg3xists/multi-client ./client
+  - docker build -t rg3xists/multi-client -f ./client/Dockerfile.dev ./client
   - docker build -t rg3xists/multi-server ./server
-  - docker build -t rg3xists/multt-nginx ./nginx
+  - docker build -t rg3xists/multt-nginx -f ./nginx/Dockerfile.dev ./nginx
   - docker build -t rg3xists/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push rg3xists/multi-client
